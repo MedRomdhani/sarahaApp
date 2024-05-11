@@ -12,7 +12,7 @@ dotenv.config()
 app.use(express.json())
 app.get('/', (req, res) => res.send('Hello World!'))
 app.get('/verify/:email', async (req, res) => {
-  await userModel.findByIdAndUpdate({email: req.params.email}, {verified: true})
+  await userModel.findOneAndUpdate({email: req.params.email}, {verified: true})
   res.json({message: 'email verified ✔'})
 })
 app.use(userRouter)

@@ -22,6 +22,3 @@ export const emailSender = async (options) => {
   console.log("Message sent: %s", info.messageId);
 }
 
-const options = {
-  email: 'mohamed.rom86@outlook.com'
-}
