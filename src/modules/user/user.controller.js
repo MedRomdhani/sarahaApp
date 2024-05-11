@@ -1,6 +1,7 @@
 import { userModel } from '../../../database/models/user.model.js'
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import { emailSender } from '../../emails/nodemailer.js';
 
 export const signUp = async (req, res) => {
   const { name, email, password, age } = req.body;
@@ -8,6 +9,7 @@ export const signUp = async (req, res) => {
   if(user) return res.json({message: "email already exist!"})
   let hash = bcrypt.hashSync(password, 8)
   userModel.insertMany({ name, email, password: hash, age })
+  emailSender({email})
   res.json({massage: "success"})
 }
 

@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
+import { htmlCode } from './html.js';
 
-export const emailSender = async () => {
+export const emailSender = async (options) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -11,12 +12,16 @@ export const emailSender = async () => {
   });
   const info = await transporter.sendMail({
     from: '"Mohamed romdhani" <mohamed.rom86@gmail.com>', // sender address
-    to: "mohamed.rom86@outlook.com", // list of receivers
-    subject: "Hello ✔", // Subject line
+    to: options.email, // list of receivers
+    subject: "Email verification ✔", // Subject line
     text: "Mohamed romdhani\'s sara7aApp 👻 test nodemailer", // plain text body
-    html: "<h1>Hello world?</h1>", // html body
+    html: htmlCode(`http://localhost:3000/verify/${options.email}`), // html body
   });
 
   
   console.log("Message sent: %s", info.messageId);
+}
+
+const options = {
+  email: 'mohamed.rom86@outlook.com'
 }
