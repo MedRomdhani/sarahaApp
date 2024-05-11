@@ -6,8 +6,8 @@ export const auth = (req, res, next) => {
 jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
   if(err)
   return res.json({message: "error token", err})
-})
 req.userId = decoded.userId;
 next()
+})
 }
 

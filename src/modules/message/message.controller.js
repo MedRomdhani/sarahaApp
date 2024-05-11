@@ -1,5 +1,5 @@
 import { messageModel } from '../../../database/models/message.model.js'
-import jwt from 'jsonwebtoken'
+import { emailSender } from '../../emails/nodemailer.js'
 
 export const addMsg = async (req, res) => {
   const { message, receivedId } = req.body
@@ -8,7 +8,7 @@ export const addMsg = async (req, res) => {
 }
 
 export const getUserMsg = async (req, res) => {
-
+  emailSender()
   const messages = await messageModel.find({ receivedId: req.userId })
   res.json({message: "success", messages})
 }
